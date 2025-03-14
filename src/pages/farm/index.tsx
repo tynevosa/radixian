@@ -97,7 +97,7 @@ export default function Farm() {
       <div className="relative w-full">
         <img
           src={FarmBG}
-          className="bottom-0 left-0"
+          className="md:w-screen md:h-screen"
         />
         {EGGS.map((egg) => (
           <Egg
@@ -106,64 +106,66 @@ export default function Farm() {
             onClick={openModal}
           />
         ))}
-      </div>
-      <div
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 49% 100%, 0 70%)" }}
-        className="absolute top-0 left-[5%] w-[12%] h-[20%] bg-[#8B501B] flex flex-col justify-start items-center"
-      >
         <div
-          className="absolute w-[calc(100%-2px)] h-[calc(100%-1px)] md:w-[calc(100%-4px)] md:h-[calc(100%-2px)] bg-[#E0B136]"
           style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 49% 100%, 0 70%)" }}
-        />
-      </div>
-      {/** Egg Buy Modal */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform transition-transform duration-500 ease-out"
-        style={{
-          transform: isOpen ? "translateY(0)" : "translateY(120%)",
-        }}>
-        <img
-          src={ModalBG}
-        />
-        <div className="absolute inset-0 w-full flex flex-col justify-start items-center">
-          <img
-            src={EggImg}
-            className="w-[20%] z-10 -mt-[5%]"
+          className="absolute top-0 left-[5%] w-[12%] aspect-square bg-[#8B501B] flex flex-col justify-start items-center"
+        >
+          <div
+            className="absolute w-[calc(100%-2px)] h-[calc(100%-1px)] md:w-[calc(100%-4px)] md:h-[calc(100%-2px)] bg-[#E0B136]"
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 49% 100%, 0 70%)" }}
           />
-          <div className="relative bg-black w-[25%] h-[12%] -mt-[3%]"
-            style={{ clipPath: "ellipse(50% 50% at 50% 50%)" }}>
-          </div>
-          <div onClick={buyEgg}
-            className="relative py-3 w-[27%] font-bold flex justify-center rounded-2xl overflow-visible cursor-pointer select-none mt-[6%] hover:shadow-green-900 hover:shadow-lg transition-all">
-            <div className="absolute top-0 left-0 w-full h-1/2 rounded-t-2xl bg-[#82BA28] border-t-4 border-[#ADF23F]" />
-            <div className="absolute bottom-0 left-0 w-full h-1/2 rounded-b-2xl bg-[#74A525]" />
-            <span className="relative z-10 lg:text-2xl md:text-xl sm:text-sm text-xs text-nowrap">BUY EGG</span>
+        </div>
+        {/** Egg Buy Modal */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform transition-transform duration-500 ease-out"
+          style={{
+            transform: isOpen ? "translateY(0)" : "translateY(120%)",
+            opacity: isOpen ? "100%" : "0%",
+          }}>
+          <img
+            src={ModalBG}
+          />
+          <div className="absolute inset-0 w-full flex flex-col justify-start items-center">
             <img
-              src={TapIcon}
-              className="absolute top-0 right-0 w-[30%]"
-              style={{ transform: `translate(30%, -30%)` }}
+              src={EggImg}
+              className="w-[20%] z-10 -mt-[5%]"
+            />
+            <div className="relative bg-black w-[25%] h-[12%] -mt-[3%]"
+              style={{ clipPath: "ellipse(50% 50% at 50% 50%)" }}>
+            </div>
+            <div onClick={buyEgg}
+              className="relative py-3 w-[27%] font-bold flex justify-center rounded-2xl overflow-visible cursor-pointer select-none mt-[6%] hover:shadow-green-900 hover:shadow-lg transition-all">
+              <div className="absolute top-0 left-0 w-full h-1/2 rounded-t-2xl bg-[#82BA28] border-t-4 border-[#ADF23F]" />
+              <div className="absolute bottom-0 left-0 w-full h-1/2 rounded-b-2xl bg-[#74A525]" />
+              <span className="relative z-10 lg:text-2xl md:text-xl sm:text-sm text-xs text-nowrap">BUY EGG</span>
+              <img
+                src={TapIcon}
+                className="absolute top-0 right-0 w-[30%]"
+                style={{ transform: `translate(30%, -30%)` }}
+              />
+            </div>
+          </div>
+          <img
+            src={CloseIcon}
+            className="absolute top-0 right-0 cursor-pointer w-[10%]"
+            style={{ transform: `translate(-30%, -30%)` }}
+            onClick={closeModal}
+          />
+        </div>
+
+        <div className="absolute left-[2%] top-1/2 w-[7%] -translate-y-1/2">
+          <div className="aspect-square border-2 border-black bg-[#E0B136] rotate-12 rounded-2xl flex flex-col items-center justify-center">
+            <img
+              src={EggImg}
+              className="h-[60%]"
             />
           </div>
+          <div className="border-2 border-black bg-white rounded-full text-black text-center px-2">
+            {count} / 1000
+          </div>
         </div>
-        <img
-          src={CloseIcon}
-          className="absolute top-0 right-0 cursor-pointer w-[10%]"
-          style={{ transform: `translate(-30%, -30%)` }}
-          onClick={closeModal}
-        />
-      </div>
-      <div className="absolute left-[2%] top-1/2 w-[5%] -translate-y-1/2">
-        <div className="aspect-square border-2 border-black bg-[#E0B136] rotate-12 rounded-2xl flex flex-col items-center justify-center">
-          <img
-            src={EggImg}
-            className="h-[70%]"
-          />
+        <div className="absolute right-[3%] top-[5%]">
+          {createElement("radix-connect-button")}
         </div>
-        <div className="border-2 border-black bg-white rounded-full text-black text-center px-2">
-          {count} / 1000
-        </div>
-      </div>
-      <div className="absolute right-[3%] top-[5%]">
-        {createElement("radix-connect-button")}
       </div>
     </div>
   )
